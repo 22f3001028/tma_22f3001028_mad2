@@ -14,10 +14,7 @@ def create_app():
     db.init_app(app)
     jwt.init_app(app)
     mail.init_app(app)
-    CORS(app, resources={r"/api/*": {"origins": [
-    "http://localhost:5173",
-    "https://managetreksbyo.netlify.app/"   # your actual Netlify URL
-]}})
+    CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     # Initialize Redis
     init_redis(app)
