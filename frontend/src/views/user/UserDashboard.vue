@@ -117,13 +117,13 @@ async function exportCSV() {
   exportMsg.value = ''
 
   try {
-    const response = await fetch('http://localhost:5000/api/user/export/bookings', {
+    const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+    const response = await fetch(`${backendUrl}/user/export/bookings`, {
       headers: { 'Authorization': `Bearer ${getToken()}` }
     })
 
     if (!response.ok) throw new Error('Export failed')
 
-    // Convert response to downloadable blob
     const blob = await response.blob()
     const url = window.URL.createObjectURL(blob)
     const link = document.createElement('a')
@@ -140,6 +140,7 @@ async function exportCSV() {
   } catch (err) {
     exportSuccess.value = false
     exportMsg.value = '❌ Export failed. Please try again.'
+    console.error('Export error:', err)
   } finally {
     exporting.value = false
   }
