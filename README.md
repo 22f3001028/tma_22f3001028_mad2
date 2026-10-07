@@ -109,10 +109,6 @@ python -m celery -A celery_app.celery beat --loglevel=info
 
 ---
 
-## AI/LLM Declaration
-
-This project was developed with AI assistance (Claude by Anthropic).
-
 The following components were implemented personally by the student
 as required by the project specification:
 
